@@ -22,6 +22,8 @@ pipeline {
     stage('Apply Kubernetes Files') {
       steps {
           withKubeConfig([credentialsId: 'kubernetes']) {
+          sh 'git clone https://github.com/vikramh89/k8repo.git'
+          sh 'cd k8repo'
           sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
           sh 'kubectl apply -f service.yaml'
         }
