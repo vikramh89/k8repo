@@ -9,7 +9,7 @@ pipeline {
     stage('Docker Push') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          sh "docker login -u ${env.dockerUsername} -p ${env.dockerPassword}"
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           sh "docker push vikramh/podinfo:${env.BUILD_NUMBER}"
         }
       }
